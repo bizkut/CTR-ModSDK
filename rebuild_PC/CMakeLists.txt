@@ -135,22 +135,32 @@ target_link_options(ctr_bin PUBLIC -fno-pie -no-pie -Wl,-Ttext,0x00500000)
 
 # === DEPENDENCIES ===
 
-find_package(SDL2 QUIET)
-if(NOT SDL2_FOUND)
-  add_subdirectory("../externals/SDL")
-  set(SDL2_LIBRARIES SDL2 SDL2main)
-  set(SDL2_INCLUDE_DIR "../externals/SDL/include")
+# Cross-compile mode: use system libraries
+if(CMAKE_CROSSCOMPILING)
+  # For armhf cross-compile, use system SDL2 and OpenAL
+  find_package(PkgConfig REQUIRED)
+  pkg_check_modules(SDL2 REQUIRED sdl2)
+  pkg_check_modules(OPENAL REQUIRED openal)
+  set(OPENAL_LIBRARY ${OPENAL_LIBRARIES})
+  set(OPENAL_INCLUDE_DIR ${OPENAL_INCLUDE_DIRS})
+else()
+  find_package(SDL2 QUIET)
+  if(NOT SDL2_FOUND)
+    add_subdirectory("../externals/SDL" "${CMAKE_BINARY_DIR}/SDL")
+    set(SDL2_LIBRARIES SDL2 SDL2main)
+    set(SDL2_INCLUDE_DIR "../externals/SDL/include")
+  endif()
+
+  find_package(OpenAL QUIET)
+  if(NOT OpenAL_FOUND)
+    add_subdirectory("../externals/openal-soft" "${CMAKE_BINARY_DIR}/openal-soft")
+    set(OPENAL_LIBRARY OpenAL)
+    set(OPENAL_INCLUDE_DIR "../externals/openal-soft/include")
+  endif()
 endif()
 
 target_link_libraries(ctr_bin ${SDL2_LIBRARIES})
 target_include_directories(ctr_bin PRIVATE ${SDL2_INCLUDE_DIRS})
-
-find_package(OpenAL QUIET)
-if(NOT OpenAL_FOUND)
-  add_subdirectory("../externals/openal-soft")
-  set(OPENAL_LIBRARY OpenAL)
-  set(OPENAL_INCLUDE_DIR "../externals/openal-soft/include")
-endif()
 
 # === PsyCross ===
 

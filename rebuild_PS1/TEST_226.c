@@ -461,7 +461,7 @@ void TEST_226(
 						*(unsigned char*)&tlByteAddr[tlU0 + 0], *(unsigned char*)&tlByteAddr[tlU0 + 1],
 						*(unsigned char*)&tlByteAddr[tlU1 + 0], *(unsigned char*)&tlByteAddr[tlU1 + 1],
 						*(unsigned char*)&tlByteAddr[tlU2 + 0], *(unsigned char*)&tlByteAddr[tlU2 + 1],
-						*(unsigned char*)&tlByteAddr[tlU3 + 0], *(unsigned char*)&tlByteAddr[tlU3 + 1],
+						*(unsigned char*)&tlByteAddr[tlU3 + 0], *(unsigned char*)&tlByteAddr[tlU3 + 1]
 						);
 
 					p->clut = tl->clut;

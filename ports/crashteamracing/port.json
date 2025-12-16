@@ -1,0 +1,27 @@
+{
+    "version": 1,
+    "name": "Crash Team Racing",
+    "items": [
+        "Crash Team Racing.sh"
+    ],
+    "items_opt": [],
+    "attr": {
+        "title": "Crash Team Racing",
+        "desc": "CTR-PC decompilation port. Requires original PS1 game data (ctr-u.bin).",
+        "inst": "Place your original PS1 disc image (ctr-u.bin) in the port directory.",
+        "genres": [
+            "racing",
+            "arcade"
+        ],
+        "porter": [
+            "CTR-tools"
+        ],
+        "image": {},
+        "rtr": false,
+        "exp": true,
+        "runtime": null,
+        "reqs": [
+            "armhf"
+        ]
+    }
+}
